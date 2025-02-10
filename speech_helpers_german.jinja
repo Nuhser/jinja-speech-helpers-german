@@ -1,7 +1,7 @@
-{% macro plural(word_singular, word_plural, qty, show_qty=true) -%}
-    {%- if is_number(qty) -%}
-        {%- if show_qty -%} {{ qty }} {% endif -%}
-        {%- if (qty | abs) == 1 -%}
+{% macro plural(word_singular, word_plural, quantity, show_quantity=true) -%}
+    {%- if is_number(quantity) -%}
+        {%- if show_quantity -%} {{ quantity }} {% endif -%}
+        {%- if (quantity | abs) == 1 -%}
             {{ iif(word_singular != '', word_singular, '') }}
         {%- else -%}
             {{ iif(word_plural != '', word_plural, '') }}
@@ -9,26 +9,26 @@
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro plural_verb(qty) -%}
-    {%- if is_number(qty) -%}
-        {{ iif(qty | abs == 1, 'ist', 'sind') }}
+{%- macro plural_verb(quantity) -%}
+    {%- if is_number(quantity) -%}
+        {{ iif(quantity | abs == 1, 'ist', 'sind') }}
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro plural_word_and_verb(word_singular, word_plural, qty, show_qty=true, verb_first=true) -%}
+{%- macro plural_word_and_verb(word_singular, word_plural, quantity, show_quantity=true, verb_first=true) -%}
     {%- if verb_first -%}
-        {{ plural_verb(qty) }} {{ plural(word_singular, word_plural, qty, show_qty) }}
+        {{ plural_verb(quantity) }} {{ plural(word_singular, word_plural, quantity, show_quantity) }}
     {%- else -%}
-        {{ plural(word_singular, word_plural, qty, show_qty) }} {{ plural_verb(qty) }}
+        {{ plural(word_singular, word_plural, quantity, show_quantity) }} {{ plural_verb(quantity) }}
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro array_to_clist(arr, convert_to_title=false) -%}
-    {%- set text = (arr | join(', ')) -%}
+{%- macro array_to_separated_list(array, separator=', ', replace_last_separator=true, convert_to_title=false) -%}
+    {%- set text = (array | join(separator)) -%}
 
-    {%- if convert_to_title -%}
-        {{ ((text | title).rsplit(', ', 1) | join(' und ')) }}
+    {%- if replace_last_separator -%}
+        {{ (iif(convert_to_title, (text | title), text).rsplit(separator, 1) | join(' und ')) }}
     {%- else -%}
-        {{ (text.rsplit(', ', 1) | join(' und ')) }}
+        {{ iif(convert_to_title, (text | title), text) }}
     {%- endif -%}
 {%- endmacro -%}
