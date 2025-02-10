@@ -13,6 +13,11 @@ This template contains Jinja macros that work with German text. One use-case for
 
 There are more macros for other formatting needs. Check out the documentation below.
 
+> [!TIP]
+> You can use this button to add the repository to your Home Assistant instance via HACS:
+>
+> [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Nuhser&repository=jinja-speech-helpers-german&category=Template)
+
 *********************
 
 ## plural
