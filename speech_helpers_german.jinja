@@ -1,0 +1,34 @@
+{% macro plural(word_singular, word_plural, qty, show_qty=true) -%}
+    {%- if is_number(qty) -%}
+        {%- if show_qty -%} {{ qty }} {% endif -%}
+        {%- if (qty | abs) == 1 -%}
+            {{ iif(word_singular != '', word_singular, '') }}
+        {%- else -%}
+            {{ iif(word_plural != '', word_plural, '') }}
+        {%- endif -%}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro plural_verb(qty) -%}
+    {%- if is_number(qty) -%}
+        {{ iif(qty | abs == 1, 'ist', 'sind') }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro plural_word_and_verb(word_singular, word_plural, qty, show_qty=true, verb_first=true) -%}
+    {%- if verb_first -%}
+        {{ plural_verb(qty) }} {{ plural(word_singular, word_plural, qty, show_qty) }}
+    {%- else -%}
+        {{ plural(word_singular, word_plural, qty, show_qty) }} {{ plural_verb(qty) }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro array_to_clist(arr, convert_to_title=false) -%}
+    {%- set text = (arr | join(', ')) -%}
+
+    {%- if convert_to_title -%}
+        {{ ((text | title).rsplit(', ', 1) | join(' und ')) }}
+    {%- else -%}
+        {{ (text.rsplit(', ', 1) | join(' und ')) }}
+    {%- endif -%}
+{%- endmacro -%}
