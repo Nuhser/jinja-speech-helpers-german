@@ -4,7 +4,9 @@
 
 > [!IMPORTANT]
 > This template is based on a template idea by [@jazzyisj](https://github.com/jazzyisj). Please check out their repository for a version that works with English text and leave a star: https://github.com/jazzyisj/speech-helpers-jinja/
-> <br>
+>
+>  <br>
+>
 > You can also find it in inside HACS in Home Assistant under the name *Jinja Speech Helpers*.
 
 This template contains Jinja macros that work with German text. One use-case for those macros are notification messages where you don't know if a word needs to be singular or plural. The macros will look at the given quantity and use the correct words.
@@ -30,14 +32,14 @@ Looks at the given quantity and depending on it, returns `word_singular` or `wor
 
 ### Examples
 
-#### Input
+**Input**
 
 ```jinja2
 Du hast {{ plural('Apfel', 'Äpfel', 3) }}.
 Es gibt ein Problem mit {{ plural('der Lampe', 'den Lampen', 1, false) }}.
 ```
 
-#### Output
+**Output**
 
 ```text
 Du hast 3 Äpfel.
@@ -60,13 +62,13 @@ Looks at the given quantity and depending on it, returns the words "*ist*" or "*
 
 ### Examples
 
-#### Input
+**Input**
 
 ```jinja2
 Folgende Tür(en) {{ plural_verb(2) }} offen: ...
 ```
 
-#### Output
+**Output**
 
 ```text
 Folgende Tür(en) sind offen: ...
@@ -92,7 +94,7 @@ Works like a combination of `plural` and `plural_verb`. It looks at the given qu
 
 ### Examples
 
-#### Input
+**Input**
 
 ```jinja2
 Es {{ plural_word_and_verb('Tür', 'Türen', 0) }} offen.
@@ -100,7 +102,7 @@ Es {{ plural_word_and_verb('Tür', 'Türen', 0) }} offen.
 {{ plural_word_and_verb('Ein Licht', 'Mehrere Lichter', 5, false, false) }} angeschaltet.
 ```
 
-#### Output
+**Output**
 
 ```text
 Es sind 0 Türen offen.
@@ -127,7 +129,7 @@ Converts an array of strings into a single string with (comma-)separated element
 
 ### Examples
 
-#### Input
+**Input**
 
 ```jinja2
 {{ array_to_separated_list(['foo', 'bar', 'test']) }}
@@ -136,7 +138,7 @@ Converts an array of strings into a single string with (comma-)separated element
 {{ array_to_separated_list(['foo', 'bar', 'test'], replace_last_separator=false) }}
 ```
 
-#### Output
+**Output**
 
 ```text
 foo, bar und test
