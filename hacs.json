@@ -1,0 +1,6 @@
+{
+  "name": "Jinja Speech Helpers German",
+  "filename": "speech_helpers_german.jinja",
+  "homeassistant": "2024.1.0",
+  "render_readme": true
+}
