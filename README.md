@@ -1,15 +1,19 @@
 # Jinja Speech Helper Macros for German Text
 
+![Version](https://img.shields.io/github/v/release/Nuhser/jinja-speech-helpers-german)
+
 > [!IMPORTANT]
 > This template is based on a template idea by [@jazzyisj](https://github.com/jazzyisj). Please check out their repository for a version that works with English text and leave a star: https://github.com/jazzyisj/speech-helpers-jinja/
-> 
+> <br>
 > You can also find it in inside HACS in Home Assistant under the name *Jinja Speech Helpers*.
 
 This template contains Jinja macros that work with German text. One use-case for those macros are notification messages where you don't know if a word needs to be singular or plural. The macros will look at the given quantity and use the correct words.
 
 There are more macros for other formatting needs. Check out the documentation below.
 
-## `plural`
+*********************
+
+## plural
 
 Looks at the given quantity and depending on it, returns `word_singular` or `word_plural`.
 
@@ -18,7 +22,7 @@ Looks at the given quantity and depending on it, returns `word_singular` or `wor
 `plural(word_singular, word_plural, quantity, show_quantity=true)`
 
 | Param | Type | Explanation |
-| ----- | ---- | ----------- |
+| :----- | :---- | :----------- |
 | `word_singular` | string | Will be used as the output if `quantity` **is 1**. |
 | `word_plural` | string | Will be used as the output if `quantity` **is 0** or **above 1**. |
 | `quantity` | number | The quantity of the word that should be pluralized. |
@@ -40,7 +44,9 @@ Du hast 3 Äpfel.
 Es gibt ein Problem mit der lampe.
 ```
 
-## `plural_verb`
+*********************
+
+## plural_verb
 
 Looks at the given quantity and depending on it, returns the words "*ist*" or "*sind*".
 
@@ -49,7 +55,7 @@ Looks at the given quantity and depending on it, returns the words "*ist*" or "*
 `plural_verb(quantity)`
 
 | Param | Type | Explanation |
-| ----- | ---- | ----------- |
+| :----- | :---- | :----------- |
 | `quantity` | number | If it is **1** "*ist*" will be returned. Otherwise, "*sind*" will be returned. |
 
 ### Examples
@@ -66,9 +72,9 @@ Folgende Tür(en) {{ plural_verb(2) }} offen: ...
 Folgende Tür(en) sind offen: ...
 ```
 
-> This example may be a bit odd...
+*********************
 
-## `plural_word_and_verb`
+## plural_word_and_verb
 
 Works like a combination of `plural` and `plural_verb`. It looks at the given quantity and uses the corresponding word but also adds the correct verb before or after the word.
 
@@ -77,7 +83,7 @@ Works like a combination of `plural` and `plural_verb`. It looks at the given qu
 `plural_word_and_verb(word_singular, word_plural, quantity, show_quantity=true, verb_first=true)`
 
 | Param | Type | Explanation |
-| ----- | ---- | ----------- |
+| :----- | :---- | :----------- |
 | `word_singular` | string | Will be used as the output if `quantity` **is 1**. |
 | `word_plural` | string | Will be used as the output if `quantity` **is 0** or **above 1**. |
 | `quantity` | number | The quantity of the word that should be pluralized. Also decides if the verb should be "*ist*" (singular) or "*sind*" (plural). |
@@ -102,7 +108,9 @@ Es sind 0 Türen offen.
 Mehrere Lichter sind angeschlatet.
 ```
 
-## `array_to_separated_list`
+*********************
+
+## array_to_separated_list
 
 Converts an array of strings into a single string with (comma-)separated elements. By default the separator used will be "*,* " and the last separator will be replaced by " *und* ". You can also convert the elements from the array into title-case.
 
@@ -111,7 +119,7 @@ Converts an array of strings into a single string with (comma-)separated element
 `array_to_separated_list(array, separator=', ', replace_last_separator=true, convert_to_title=false)`
 
 | Param | Type | Explanation |
-| ----- | ---- | ----------- |
+| :----- | :---- | :----------- |
 | array | [string] | The array of strings that should be converted. |
 | separator | string | The string that is added between the elements during convertion |
 | replace_last_separator | boolean | If `true`, the last separator will be replaced by " *und* ". (*Default:* `true`) |
