@@ -1,6 +1,12 @@
 # Jinja Speech Helper Macros for German Text
 
-![Version](https://img.shields.io/github/v/release/Nuhser/jinja-speech-helpers-german) [![Last commit](https://img.shields.io/github/last-commit/Nuhser/jinja-speech-helpers-german)](#) [![Home Assistant Community Forum](https://img.shields.io/badge/Home%20Assistant-Community%20Forum-blue?logo=home-assistant)](https://community.home-assistant.io/t/custom-template-for-formatting-german-text/845188)
+![GitHub Repo stars](https://img.shields.io/github/stars/Nuhser/jinja-speech-helpers-german)
+![Version](https://img.shields.io/github/v/release/Nuhser/jinja-speech-helpers-german)
+[![Last commit](https://img.shields.io/github/last-commit/Nuhser/jinja-speech-helpers-german)](#)
+<br/>
+[![HACS](https://img.shields.io/badge/HACS-Default-41BDF5.svg?logo=home-assistant-community-store)](https://github.com/hacs/default)
+<br/>
+[![Home Assistant Community Forum](https://img.shields.io/badge/Home_Assistant-Community_Forum-18BCF2?logo=home-assistant)](https://community.home-assistant.io/t/custom-template-for-formatting-german-text/845188)
 
 > [!IMPORTANT]
 > This template is based on a template idea by [@jazzyisj](https://github.com/jazzyisj). Please check out their repository for a version that works with English text and leave a star: https://github.com/jazzyisj/speech-helpers-jinja/
