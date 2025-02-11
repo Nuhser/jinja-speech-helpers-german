@@ -1,6 +1,6 @@
 # Jinja Speech Helper Macros for German Text
 
-![Version](https://img.shields.io/github/v/release/Nuhser/jinja-speech-helpers-german)
+![Version](https://img.shields.io/github/v/release/Nuhser/jinja-speech-helpers-german) [![Last commit](https://img.shields.io/github/last-commit/Nuhser/jinja-speech-helpers-german)](#) [![Home Assistant Community Forum](https://img.shields.io/badge/Home%20Assistant-Community%20Forum-blue?logo=home-assistant)](https://community.home-assistant.io/t/custom-template-for-formatting-german-text/845188)
 
 > [!IMPORTANT]
 > This template is based on a template idea by [@jazzyisj](https://github.com/jazzyisj). Please check out their repository for a version that works with English text and leave a star: https://github.com/jazzyisj/speech-helpers-jinja/
@@ -13,18 +13,44 @@ This template contains Jinja macros that work with German text. One use-case for
 
 There are more macros for other formatting needs. Check out the documentation below.
 
-> [!TIP]
-> You can use this button to add the repository to your Home Assistant instance via HACS:
->
-> [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Nuhser&repository=jinja-speech-helpers-german&category=Template)
+## Installation
 
-*********************
+<details>
 
-## plural
+<summary>Without HACS</summary>
+
+<br>
+
+1. Download the contents from [speech_helpers_german.jinja](https://github.com/Nuhser/jinja-speech-helpers-german/blob/master/speech_helpers_german.jinja) from the master-branch.
+2. Add the file to your `<config>/custom_templates`-folder.
+3. Reload your configuration from within the developer tools in Home Assistant.
+4. The template should now be ready for use.
+
+</details>
+
+<details>
+
+<summary>With HACS</summary>
+
+<br>
+
+1. Search for "*Jinja Speech Helpers German*" in HACS.
+2. Download the repository via HACS.
+3. The template should now be ready for use.
+
+You can also use this button to add the repository to your Home Assistant instance via HACS:
+
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Nuhser&repository=jinja-speech-helpers-german&category=Template)
+
+</details>
+
+## Documentation
+
+### plural
 
 Looks at the given quantity and depending on it, returns `word_singular` or `word_plural`.
 
-### Syntax
+#### Syntax
 
 `plural(word_singular, word_plural, quantity, show_quantity=true)`
 
@@ -35,11 +61,12 @@ Looks at the given quantity and depending on it, returns `word_singular` or `wor
 | `quantity` | number | The quantity of the word that should be pluralized. |
 | `show_quantity` | boolean | Will add the given quantity to the output infront of the word. (*Default:* `true`) |
 
-### Examples
+#### Examples
 
 **Input**
 
 ```jinja2
+{% from 'speech_helpers_german.jinja' import plural %}
 Du hast {{ plural('Apfel', 'Äpfel', 3) }}.
 Es gibt ein Problem mit {{ plural('der Lampe', 'den Lampen', 1, false) }}.
 ```
@@ -53,11 +80,11 @@ Es gibt ein Problem mit der lampe.
 
 *********************
 
-## plural_verb
+### plural_verb
 
 Looks at the given quantity and depending on it, returns the words "*ist*" or "*sind*".
 
-### Syntax
+#### Syntax
 
 `plural_verb(quantity)`
 
@@ -65,11 +92,12 @@ Looks at the given quantity and depending on it, returns the words "*ist*" or "*
 | :----- | :---- | :----------- |
 | `quantity` | number | If it is **1** "*ist*" will be returned. Otherwise, "*sind*" will be returned. |
 
-### Examples
+#### Examples
 
 **Input**
 
 ```jinja2
+{% from 'speech_helpers_german.jinja' import plural_verb %}
 Folgende Tür(en) {{ plural_verb(2) }} offen: ...
 ```
 
@@ -81,11 +109,11 @@ Folgende Tür(en) sind offen: ...
 
 *********************
 
-## plural_word_and_verb
+### plural_word_and_verb
 
 Works like a combination of `plural` and `plural_verb`. It looks at the given quantity and uses the corresponding word but also adds the correct verb before or after the word.
 
-### Syntax
+#### Syntax
 
 `plural_word_and_verb(word_singular, word_plural, quantity, show_quantity=true, verb_first=true)`
 
@@ -97,11 +125,12 @@ Works like a combination of `plural` and `plural_verb`. It looks at the given qu
 | `show_quantity` | boolean | Will add the given quantity to the output infront of the word. (*Default:* `true`) |
 | `verb_first` | boolean | Decides if the verb should be added before the number and word or after (see examples below). (*Default:* `true`) |
 
-### Examples
+#### Examples
 
 **Input**
 
 ```jinja2
+{% from 'speech_helpers_german.jinja' import plural_word_and_verb %}
 Es {{ plural_word_and_verb('Tür', 'Türen', 0) }} offen.
 {{ plural_word_and_verb('Tür', 'Türen', 1, true, false) }} gekippt.
 {{ plural_word_and_verb('Ein Licht', 'Mehrere Lichter', 5, false, false) }} angeschaltet.
@@ -117,11 +146,11 @@ Mehrere Lichter sind angeschlatet.
 
 *********************
 
-## array_to_separated_list
+### array_to_separated_list
 
 Converts an array of strings into a single string with (comma-)separated elements. By default the separator used will be "*,* " and the last separator will be replaced by " *und* ". You can also convert the elements from the array into title-case.
 
-### Syntax
+#### Syntax
 
 `array_to_separated_list(array, separator=', ', replace_last_separator=true, convert_to_title=false)`
 
@@ -132,11 +161,12 @@ Converts an array of strings into a single string with (comma-)separated element
 | replace_last_separator | boolean | If `true`, the last separator will be replaced by " *und* ". (*Default:* `true`) |
 | convert_to_title | boolean | If `true`, the elements of the array will be converted into title-case. (*Default:* `false`) |
 
-### Examples
+#### Examples
 
 **Input**
 
 ```jinja2
+{% from 'speech_helpers_german.jinja' import array_to_separated_list %}
 {{ array_to_separated_list(['foo', 'bar', 'test']) }}
 {{ array_to_separated_list(['foo', 'bar', 'test'], convert_to_title=true) }}
 {{ array_to_separated_list(['foo', 'bar', 'test'], ' & ', false) }}
