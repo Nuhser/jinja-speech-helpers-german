@@ -1,4 +1,8 @@
-{% macro plural(word_singular, word_plural, quantity, show_quantity=true) -%}
+{%- macro _islist(object) -%}
+    {{ object is iterable and (object is not string and object is not mapping) }}
+{%- endmacro -%}
+
+{%- macro plural(word_singular, word_plural, quantity, show_quantity=true) -%}
     {%- if is_number(quantity) -%}
         {%- if show_quantity -%} {{ quantity }} {% endif -%}
         {%- if (quantity | abs) == 1 -%}
@@ -30,5 +34,13 @@
         {{ (iif(convert_to_title, (text | title), text).rsplit(separator, 1) | join(' und ')) }}
     {%- else -%}
         {{ iif(convert_to_title, (text | title), text) }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro array_to_bullet_point_list(array, bullet_symbol='- ') -%}
+    {%- if (_islist(array) | bool) -%}
+        {%- for element in array -%}
+            {{ bullet_symbol }} {{ element }}<br/>
+        {%- endfor -%}
     {%- endif -%}
 {%- endmacro -%}
