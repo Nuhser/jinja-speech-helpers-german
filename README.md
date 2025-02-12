@@ -15,7 +15,7 @@
 >
 > You can also find it in inside HACS in Home Assistant under the name *Jinja Speech Helpers*.
 
-This template contains Jinja macros that work with German text. One use-case for those macros are notification messages where you don't know if a word needs to be singular or plural. The macros will look at the given quantity and use the correct words.
+This template contains Jinja macros that work with German text. One use-case for those macros are [notification messages](https://companion.home-assistant.io/docs/notifications/notifications-basic/) where you don't know if a word needs to be singular or plural. The macros will look at the given quantity and use the correct words.
 
 There are more macros for other formatting needs. Check out the documentation below.
 
@@ -162,8 +162,8 @@ Converts an array of strings into a single string with (comma-)separated element
 
 | Param | Type | Explanation |
 | :----- | :---- | :----------- |
-| array | [string] | The array of strings that should be converted. |
-| separator | string | The string that is added between the elements during convertion |
+| array | list of strings | The array of strings that should be converted. |
+| separator | string | The string that is added between the elements during convertion. (*Default:* `', '`) |
 | replace_last_separator | boolean | If `true`, the last separator will be replaced by " *und* ". (*Default:* `true`) |
 | convert_to_title | boolean | If `true`, the elements of the array will be converted into title-case. (*Default:* `false`) |
 
@@ -186,4 +186,50 @@ foo, bar und test
 Foo, Bar und Test
 foo & bar & test
 foo, bar, test
+```
+
+*********************
+
+### array_to_bullet_points_list
+
+Converts an array of strings into a bullet point list. At the end of each bullet point, an `<br/>` is added. This will be converted into line breaks when using the output for [phone notifications](https://companion.home-assistant.io/docs/notifications/notifications-basic/) or [HTML5 Push Notifications](https://www.home-assistant.io/integrations/html5).
+
+#### Syntax
+
+`array_to_bullet_points_list(array, bullet_symbol='- ')`
+
+| Param | Type | Explanation |
+| :----- | :---- | :----------- |
+| array | list of strings | The array of strings that should be converted. |
+| bullet_symbol | string | The string that should be added at the beginning of every line as the bullet point symbol. (*Default:* `'- '`) |
+
+#### Examples
+
+**Input**
+
+```jinja2
+{% from 'speech_helpers_german.jinja' import array_to_bullet_points_list %}
+{{ array_to_bullet_points_list(['foo', 'bar', 'test']) }}
+
+{{ array_to_bullet_points_list(['foo', 'bar', 'test'], '‣ ') }}
+```
+
+**Output Raw**
+
+```text
+-  foo<br/>-  bar<br/>-  test<br/>
+
+‣  foo<br/>‣  bar<br/>‣  test<br/>
+```
+
+**Output in Notification**
+
+```text
+-  foo
+-  bar
+-  test
+
+‣  foo
+‣  bar
+‣  test
 ```
