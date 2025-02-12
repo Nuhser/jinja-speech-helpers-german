@@ -1,8 +1,8 @@
 # Jinja Speech Helper Macros for German Text
 
-![GitHub Repo stars](https://img.shields.io/github/stars/Nuhser/jinja-speech-helpers-german)
-![Version](https://img.shields.io/github/v/release/Nuhser/jinja-speech-helpers-german)
-[![Last commit](https://img.shields.io/github/last-commit/Nuhser/jinja-speech-helpers-german)](#)
+[![Version](https://img.shields.io/github/v/release/Nuhser/jinja-speech-helpers-german)](https://github.com/Nuhser/jinja-speech-helpers-german/releases/latest)
+[![Last commit](https://img.shields.io/github/last-commit/Nuhser/jinja-speech-helpers-german)](https://github.com/Nuhser/jinja-speech-helpers-german/commits/master/)
+[![GitHub Repo stars](https://img.shields.io/github/stars/Nuhser/jinja-speech-helpers-german)](#)
 <br/>
 [![HACS](https://img.shields.io/badge/HACS-Default-41BDF5.svg?logo=home-assistant-community-store)](https://github.com/hacs/default)
 <br/>
