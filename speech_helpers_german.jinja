@@ -37,7 +37,7 @@
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro array_to_bullet_point_list(array, bullet_symbol='- ') -%}
+{%- macro array_to_bullet_points_list(array, bullet_symbol='- ') -%}
     {%- if (_islist(array) | bool) -%}
         {%- for element in array -%}
             {{ bullet_symbol }} {{ element }}<br/>
