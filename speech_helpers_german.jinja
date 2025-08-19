@@ -1,7 +1,3 @@
-{%- macro _islist(object) -%}
-    {{ object is iterable and (object is not string and object is not mapping) }}
-{%- endmacro -%}
-
 {%- macro plural(word_singular, word_plural, quantity, show_quantity=true) -%}
     {%- if is_number(quantity) -%}
         {%- if show_quantity -%} {{ quantity }} {% endif -%}
@@ -38,7 +34,7 @@
 {%- endmacro -%}
 
 {%- macro array_to_bullet_points_list(array, bullet_symbol='- ') -%}
-    {%- if (_islist(array) | bool) -%}
+    {%- if array is list -%}
         {%- for element in array -%}
             {{ bullet_symbol }} {{ element }}<br/>
         {%- endfor -%}
