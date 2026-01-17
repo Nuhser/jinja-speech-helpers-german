@@ -233,3 +233,95 @@ Converts an array of strings into a bullet point list. At the end of each bullet
 ‣  bar
 ‣  test
 ```
+
+*********************
+
+### parse_number
+
+Converts every number between 0 and 999.999.999.999 written as a German word into to corresponding integer. Works when writing numbers with spaces around the 'Milliarden' and 'Million'/'Millionen' as well as without spaces.
+
+#### Syntax
+
+`parse_number(word)`
+
+| Param | Type | Explanation |
+| :----- | :---- | :----------- |
+| word | string | A number written text |
+
+#### Examples
+
+**Input**
+
+```jinja2
+{{% from 'speech_helpers_german.jinja' import parse_number %}
+
+{{ parse_number('achthundertzehn Milliarden zweihundertacht Million vierhundertsiebzehntausendfünfhundertsechsunddreißig') }}
+{{ parse_number('achthundertzehnmilliardenzweihundertachtmillionenvierhundertsiebzehntausendfünfhundertsechsunddreißig') }}
+```
+
+**Output Raw**
+
+```text
+810208417536
+810208417536
+```
+
+*********************
+
+### capitalize_first_word
+
+Capitalizes the first word in a text.
+
+#### Syntax
+
+`capitalize_first_word(text)`
+
+| Param | Type | Explanation |
+| :----- | :---- | :----------- |
+| text | string | Text which should be modified |
+
+#### Examples
+
+**Input**
+
+```jinja2
+{% from 'speech_helpers_german.jinja' import capitalize_first_word %}
+
+{{ capitalize_first_word('das ist ein test') }}
+```
+
+**Output Raw**
+
+```text
+Das ist ein test
+```
+
+*********************
+
+### month_name
+
+Returns the name of a month for a given number.
+
+#### Syntax
+
+`month_name(index)`
+
+| Param | Type | Explanation |
+| :----- | :---- | :----------- |
+| index | string | The number of the month starting with 1 |
+
+#### Examples
+
+**Input**
+
+```jinja2
+{% from 'speech_helpers_german.jinja' import month_name %}
+
+{{ month_name(9) }}
+```
+
+**Output Raw**
+
+```text
+September
+```

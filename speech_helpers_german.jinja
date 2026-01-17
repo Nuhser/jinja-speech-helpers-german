@@ -40,3 +40,62 @@
         {%- endfor -%}
     {%- endif -%}
 {%- endmacro -%}
+
+{%- macro parse_number(word) -%}
+    {%- set num_lookup = {
+        'ein': 1, 'eins': 1, 'eine': 1, 'einer': 1, 'einem': 1, 'einen': 1, 'eines': 1,
+        'zwei': 2, 'drei': 3, 'vier': 4, 'fünf': 5, 'sechs': 6, 'sieben': 7, 'acht': 8, 'neun': 9,
+        'zehn': 10, 'elf': 11, 'zwölf': 12, 'dreizehn': 13, 'vierzehn': 14, 'fünfzehn': 15, 'sechzehn': 16, 'siebzehn': 17, 'achtzehn': 18, 'neunzehn': 19,
+        'zwanzig': 20, 'dreißig': 30, 'vierzig': 40, 'fünfzig': 50, 'sechzig': 60, 'siebzig': 70, 'achtzig': 80, 'neunzig': 90,
+        'hundert': 100, 'tausend': 1000, 'million': 1000000, 'millionen': 1000000, 'milliarden': 1000000000
+    } -%}
+
+    {%- set w = word | lower | replace('millionen', 'million') | replace(' ', '')  -%}
+    {%- set total = 0 -%}
+    
+    {%- if 'milliarden' in w -%}
+        {%- set parts = w.split('milliarden') -%}
+        {%- set billions = parts[0] if parts[0] else 'eins' -%}
+        {%- set total = total + (int(parse_number(billions)) * 1000000000) -%}
+        {%- set w = parts[1] -%}
+    {%- endif -%}
+
+    {%- if 'million' in w -%}
+        {%- set parts = w.split('million') -%}    
+        {%- set millions = parts[0] if parts[0] else 'eins' -%}
+        {%- set total = total + (int(parse_number(millions)) * 1000000) -%}
+        {%- set w = parts[1] -%}
+    {%- endif -%}
+    
+    {%- if 'tausend' in w -%}
+        {%- set parts = w.split('tausend') -%}
+        {%- set thousands = parts[0] if parts[0] else 'eins' -%}
+        {%- set total = total + (int(parse_number(thousands)) * 1000) -%}
+        {%- set w = parts[1] -%}
+    {%- endif -%}
+
+    {%- if 'hundert' in w -%}
+        {%- set parts = w.split('hundert') -%}
+        {%- set hundreds = parts[0] if parts[0] else 'eins' -%}
+        {%- set total = total + (int(parse_number(hundreds)) * 100) -%}
+        {%- set w = parts[1] -%}
+    {%- endif -%}
+
+    {%- if 'und' in w -%}
+        {%- set parts = w.split('und') -%}
+        {%- set total = total + num_lookup.get(parts[0], 0) + num_lookup.get(parts[1], 0) -%}
+    {%- else -%}
+        {%- set total = total + num_lookup.get(w, 0) -%}
+    {%- endif -%}
+
+    {{ total }}
+{%- endmacro -%}
+
+{%- macro capitalize_first_word(text) -%}
+    {{ text.split(' ')[0] | capitalize }} {{ text.split(' ')[1:] | join(' ') }}
+{%- endmacro -%}
+
+{%- macro month_name(index) -%}
+    {%- set months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'] -%}
+    {{ months[(index | int) - 1] }}
+{%- endmacro -%}
