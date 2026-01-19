@@ -42,6 +42,10 @@
 {%- endmacro -%}
 
 {%- macro parse_number(word) -%}
+    {{ int(word, _parse_number_internal(word)) }}
+{%- endmacro -%}
+
+{%- macro _parse_number_internal(word) -%}
     {%- set num_lookup = {
         'ein': 1, 'eins': 1, 'eine': 1, 'einer': 1, 'einem': 1, 'einen': 1, 'eines': 1,
         'zwei': 2, 'drei': 3, 'vier': 4, 'fünf': 5, 'sechs': 6, 'sieben': 7, 'acht': 8, 'neun': 9,
@@ -59,28 +63,28 @@
     {%- if 'milliarde' in w -%}
         {%- set parts = w.split('milliarde') -%}
         {%- set billions = parts[0] if parts[0] else 'eins' -%}
-        {%- set total = total + (int(parse_number(billions)) * 1000000000) -%}
+        {%- set total = total + (int(_parse_number_internal(billions)) * 1000000000) -%}
         {%- set w = parts[1] -%}
     {%- endif -%}
 
     {%- if 'million' in w -%}
         {%- set parts = w.split('million') -%}
         {%- set millions = parts[0] if parts[0] else 'eins' -%}
-        {%- set total = total + (int(parse_number(millions)) * 1000000) -%}
+        {%- set total = total + (int(_parse_number_internal(millions)) * 1000000) -%}
         {%- set w = parts[1] -%}
     {%- endif -%}
     
     {%- if 'tausend' in w -%}
         {%- set parts = w.split('tausend') -%}
         {%- set thousands = parts[0] if parts[0] else 'eins' -%}
-        {%- set total = total + (int(parse_number(thousands)) * 1000) -%}
+        {%- set total = total + (int(_parse_number_internal(thousands)) * 1000) -%}
         {%- set w = parts[1] -%}
     {%- endif -%}
 
     {%- if 'hundert' in w -%}
         {%- set parts = w.split('hundert') -%}
         {%- set hundreds = parts[0] if parts[0] else 'eins' -%}
-        {%- set total = total + (int(parse_number(hundreds)) * 100) -%}
+        {%- set total = total + (int(_parse_number_internal(hundreds)) * 100) -%}
         {%- set w = parts[1] -%}
     {%- endif -%}
 
