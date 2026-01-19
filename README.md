@@ -240,6 +240,9 @@ Converts an array of strings into a bullet point list. At the end of each bullet
 
 Converts every number between 0 and 999.999.999.999 written as a German word into to corresponding integer. Works when writing numbers with spaces around the 'Milliarden' and 'Million'/'Millionen' as well as without spaces.
 
+> [!NOTE]
+> If you use this macro in a template, you will need to convert the output to an integer again by using something like `int(parse_number(...))`. Home Assistant is always interpreting the output of macros as strings unfortunately.
+
 #### Syntax
 
 `parse_number(word)`
